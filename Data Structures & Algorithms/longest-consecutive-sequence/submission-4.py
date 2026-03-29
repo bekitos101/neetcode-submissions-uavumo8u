@@ -1,0 +1,39 @@
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        # nums = [2,20,4,10,3,4,5]
+        #sort ? 
+        # [2,3,4,4,5,10,20]
+        #[2,3,4,5,10,20]
+        #longest squence: [2,3,4,5]=> res=4 
+
+        #nums = [0,3,2,5,4,6,1,1]
+        #nums=[0,1,1,2,3,4,5,6]
+        
+        #Dry Run 
+        #nums=[0,3,2,5,4,6,1,1]
+        #sort:[0,1,1,2,3,4,5,6]
+        #i=0 => nums[0]=0 nums[1]=1 => sequence=2 
+        #i=1 => nums[1]=1 nums[2]=1 => skip 
+        #i=2=> nums[2]=1 nums[3]=2 => sequence=3 
+        #i=3 => nums[3]=2 nums[4]=3 => sequence =4 
+        #i=4 => nums[4]=3 nums[5]=4 => sequence=5 
+        #i=5 => nums[5]=4 nums[6]=5=> sequence=6
+        #i=6 => nums[6]=5 nums[7]=6 => sequence=7 
+
+        if not nums:
+            return 0 
+            
+        nums.sort(reverse=False)
+        max_consecutive_sequence=0
+        sequence=1
+        for i in range(0,len(nums)-1):
+            if nums[i]==nums[i+1]:
+                continue     
+            if nums[i+1]==nums[i]+1:
+                sequence+=1
+            else:
+                sequence=1
+            max_consecutive_sequence=max(sequence,max_consecutive_sequence)
+        return max(max_consecutive_sequence,sequence)  
+            
+            
